@@ -58,6 +58,7 @@ public class RestUserController {
     @RequiresPermissions("users")
     @PostMapping("/list")
     public PageResult list(UserConditionVO vo) {
+        System.out.println("user list!");
         PageInfo<User> pageInfo = userService.findPageBreakByCondition(vo);
         return ResultUtil.tablePage(pageInfo);
     }

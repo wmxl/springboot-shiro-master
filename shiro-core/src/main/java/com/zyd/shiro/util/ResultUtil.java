@@ -70,22 +70,30 @@ public class ResultUtil {
     }
 
     public static ResponseVO success(String message) {
+        System.out.println("aaaaaaaaa1");
         return success(message, null);
     }
 
     public static ResponseVO success(ResponseStatus status) {
+
+        System.out.println("aaaaaaaaa2");
         return vo(status.getCode(), status.getMessage(), null);
     }
 
     public static ResponseVO vo(int code, String message, Object data) {
+        System.out.println("aaaaaaaaa3");
+
         return new ResponseVO<>(code, message, data);
     }
 
     public static PageResult tablePage(Long total, List<?> list) {
+        System.out.println("aaaaaaaaa");
+
         return new PageResult(total, list);
     }
 
     public static PageResult tablePage(PageInfo info) {
+        System.out.println("bbb");
         if (info == null) {
             return new PageResult(0L, new ArrayList());
         }

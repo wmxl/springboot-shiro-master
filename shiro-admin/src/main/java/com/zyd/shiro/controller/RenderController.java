@@ -59,8 +59,13 @@ public class RenderController {
     public ModelAndView user() {
         return ResultUtil.view("user/list");
     }
+    @RequiresPermissions("carusers")
+    @GetMapping("/carusers")
+    public ModelAndView caruser() {
+        return ResultUtil.view("user/list");
+    }
 
-    @RequiresPermissions("plans")
+    @RequiresPermissions("druid")
     @GetMapping("/plans")
     public ModelAndView plan() {
         return ResultUtil.view("plan/list");

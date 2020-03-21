@@ -17,19 +17,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-package com.zyd.shiro.persistence.beans;
+package com.zyd.shiro.business.service;
 
-import com.zyd.shiro.framework.object.AbstractDO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import com.github.pagehelper.PageInfo;
+import com.zyd.shiro.business.entity.Plan;
+import com.zyd.shiro.business.vo.PlanConditionVO;
+import com.zyd.shiro.framework.object.AbstractService;
 
 /**
- * 预案类
+ * 用户
+ *
+ * @author yadong.zhang (yadong.zhang0415(a)gmail.com)
+ * @version 1.0
+ * @website https://www.zhyd.me
+ * @date 2018/4/16 16:26
+ * @since 1.0
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-public class Plan extends AbstractDO {
-    private String name;
-    private int type;
-    private String level;
+public interface SysPlanService extends AbstractService<Plan, Long> {
+
+    /**
+     * 分页查询
+     *
+     * @param vo
+     * @return
+     */
+    PageInfo<Plan> findPageBreakByCondition(PlanConditionVO vo);
+
+
+
 }

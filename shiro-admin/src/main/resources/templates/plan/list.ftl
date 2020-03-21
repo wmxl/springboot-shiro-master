@@ -29,6 +29,7 @@
     </div>
 </div>
 <#include "/layout/footer.ftl"/>
+
 <!--弹框-->
 <div class="modal fade bs-example-modal-sm" id="selectRole" tabindex="-1" role="dialog" aria-labelledby="selectRoleLabel">
     <div class="modal-dialog modal-sm" role="document">
@@ -51,6 +52,7 @@
     </div>
 </div>
 <!--/弹框-->
+
 <!--添加预案弹框-->
 <div class="modal fade" id="addOrUpdateModal" tabindex="-1" role="dialog" aria-labelledby="addroleLabel">
     <div class="modal-dialog" role="document">
@@ -108,6 +110,7 @@
     </div>
 </div>
 <!--/添加预案弹框-->
+
 <script>
     /**
      * 操作按钮
@@ -120,7 +123,9 @@
         var currentUserId = '${user.id}';
         var trUserId = row.id;
         var operateBtn = [
-            '<@shiro.hasPermission name="user:edit"><a class="btn btn-xs btn-primary btn-update" data-id="' + trUserId + '"><i class="fa fa-edit"></i>编辑</a></@shiro.hasPermission>',
+            '<@shiro.hasPermission name="user:edit"><a class="btn btn-xs btn-primary btn-update" data-id="' + trUserId + '"><i class="fa fa-edit"></i>编辑预案</a></@shiro.hasPermission>',
+            '<@shiro.hasPermission name="user:delete"><a class="btn btn-xs btn-danger btn-remove" data-id="' + trUserId + '"><i class="fa fa-trash-o"></i>删除远</a></@shiro.hasPermission>',
+            '<@shiro.hasPermission name="user:allotRole"><a class="btn btn-xs btn-info btn-allot" data-id="' + trUserId + '"><i class="fa fa-circle-thin"></i>分配安全事件类型</a></@shiro.hasPermission>',
         ];
         if (currentUserId != trUserId) {
             operateBtn.push('<@shiro.hasPermission name="user:delete"><a class="btn btn-xs btn-danger btn-remove" data-id="' + trUserId + '"><i class="fa fa-trash-o"></i>删除</a></@shiro.hasPermission>');
@@ -131,7 +136,7 @@
 
     $(function () {
         var options = {
-            url: "/user/list",
+            url: "/plan/list",
             getInfoUrl: "/user/get/{id}",
             updateUrl: "/user/edit",
             removeUrl: "/user/remove",
@@ -141,40 +146,17 @@
                 {
                     checkbox: true
                 }, {
-                    field: 'username',
+                    field: 'name',
                     title: '预案名',
                     editable: false,
                 }, {
-                    field: 'nickname',
-                    title: '昵称',
+                    field: 'type',
+                    title: '类型',
                     editable: true
                 }, {
-                    field: 'email',
-                    title: '邮箱',
+                    field: 'level',
+                    title: '等级',
                     editable: true
-                }, {
-                    field: 'qq',
-                    title: 'qq',
-                    editable: true
-                }, {
-                    field: 'userType',
-                    title: '预案类型',
-                    editable: false
-                }, {
-                    field: 'statusEnum',
-                    title: '状态',
-                    editable: false
-                }, {
-                    field: 'lastLoginTime',
-                    title: '最后登录时间',
-                    editable: false,
-                    formatter: function (code) {
-                        return new Date(code).format("yyyy-MM-dd hh:mm:ss")
-                    }
-                }, {
-                    field: 'loginCount',
-                    title: '登录次数',
-                    editable: false
                 }, {
                     field: 'operate',
                     title: '操作',

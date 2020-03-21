@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zyd.shiro.persistence.mapper.SysPlanMapper">
+	<resultMap id="rm" type="com.zyd.shiro.persistence.beans.SysPlan">
+		<result property="id" jdbcType="BIGINT" column="id"/>
+		<result property="name" jdbcType="VARCHAR" column="name"/>
+		<result property="type" jdbcType="BIGINT" column="type"/>
+		<result property="level" jdbcType="VARCHAR" column="level"/>
+	</resultMap>
+	<select id="findPageBreakByCondition" parameterType="com.zyd.shiro.business.vo.PlanConditionVO" resultMap="rm">
+		SELECT
+			com.*
+		FROM
+			sys_plan com
+		WHERE
+			1 = 1
+	</select>
+
+
+</mapper>
+
