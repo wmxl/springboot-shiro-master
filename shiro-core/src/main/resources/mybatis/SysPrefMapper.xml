@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zyd.shiro.persistence.mapper.SysPrefMapper">
+	<resultMap id="rm" type="com.zyd.shiro.persistence.beans.SysPref">
+		<result property="id" jdbcType="BIGINT" column="id"/>
+		<result property="car" jdbcType="VARCHAR" column="car"/>
+		<result property="tab1" jdbcType="VARCHAR" column="tab1"/>
+		<result property="tab2" jdbcType="VARCHAR" column="tab2"/>
+	</resultMap>
+	<select id="findPageBreakByCondition" parameterType="com.zyd.shiro.business.vo.PrefConditionVO" resultMap="rm">
+		SELECT
+			com.*
+		FROM
+			sys_pref com
+		WHERE
+			1 = 1
+	</select>
+</mapper>
+

@@ -124,7 +124,7 @@
         var trUserId = row.id;
         var operateBtn = [
             '<@shiro.hasPermission name="user:edit"><a class="btn btn-xs btn-primary btn-update" data-id="' + trUserId + '"><i class="fa fa-edit"></i>编辑预案</a></@shiro.hasPermission>',
-            '<@shiro.hasPermission name="user:delete"><a class="btn btn-xs btn-danger btn-remove" data-id="' + trUserId + '"><i class="fa fa-trash-o"></i>删除远</a></@shiro.hasPermission>',
+            '<@shiro.hasPermission name="user:delete"><a class="btn btn-xs btn-danger btn-remove" data-id="' + trUserId + '"><i class="fa fa-trash-o"></i>删除预案</a></@shiro.hasPermission>',
             '<@shiro.hasPermission name="user:allotRole"><a class="btn btn-xs btn-info btn-allot" data-id="' + trUserId + '"><i class="fa fa-circle-thin"></i>分配安全事件类型</a></@shiro.hasPermission>',
         ];
         if (currentUserId != trUserId) {

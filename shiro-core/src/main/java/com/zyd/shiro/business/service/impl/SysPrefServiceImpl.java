@@ -21,11 +21,11 @@ package com.zyd.shiro.business.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.zyd.shiro.business.entity.Plan;
-import com.zyd.shiro.business.service.SysPlanService;
-import com.zyd.shiro.business.vo.PlanConditionVO;
-import com.zyd.shiro.persistence.beans.SysPlan;
-import com.zyd.shiro.persistence.mapper.SysPlanMapper;
+import com.zyd.shiro.business.entity.Pref;
+import com.zyd.shiro.business.service.SysPrefService;
+import com.zyd.shiro.business.vo.PrefConditionVO;
+import com.zyd.shiro.persistence.beans.SysPref;
+import com.zyd.shiro.persistence.mapper.SysPrefMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,11 +46,10 @@ import java.util.List;
  */
 @Slf4j
 @Service
-public class SysPlanServiceImpl implements SysPlanService {
+public class SysPrefServiceImpl implements SysPrefService {
 
     @Autowired
-    private SysPlanMapper sysPlanMapper;
-
+    private SysPrefMapper sysPlanMapper;
 
     /**
      * 分页查询
@@ -59,43 +58,39 @@ public class SysPlanServiceImpl implements SysPlanService {
      * @return
      */
     @Override
-    public PageInfo<Plan> findPageBreakByCondition(PlanConditionVO vo) {
-        System.out.println("C2");
-
+    public PageInfo<Pref> findPageBreakByCondition(PrefConditionVO vo) {
+        System.out.println("用户偏好");
         PageHelper.startPage(vo.getPageNumber(), vo.getPageSize());
-        List<SysPlan> sysPlans = sysPlanMapper.findPageBreakByCondition(vo);
+        List<SysPref> sysPlans = sysPlanMapper.findPageBreakByCondition(vo);
         if (CollectionUtils.isEmpty(sysPlans)) {
             return null;
         }
-        System.out.println("1111111111");
-        List<Plan> users = new ArrayList<>();
-        for (SysPlan su : sysPlans) {
-            users.add(new Plan(su));
+
+        List<Pref> users = new ArrayList<>();
+        for (SysPref su : sysPlans) {
+            users.add(new Pref(su));
         }
         System.out.println("222");
-
-        System.out.println(users);
-
-        for (Plan a : users){
-            System.out.println(a.getName());
-            System.out.println(a.getType());
-            System.out.println(a.getLevel());
-        }
-        PageInfo bean = new PageInfo<SysPlan>(sysPlans);
+        PageInfo bean = new PageInfo<SysPref>(sysPlans);
         bean.setList(users);
         return bean;
     }
 
-
     @Override
-    public Plan insert(Plan entity) {
-        Assert.notNull(entity, "Plan不可为空！");
-        sysPlanMapper.insert(entity.getSysPlan());
+    public Pref insert(Pref entity) {
+        Assert.notNull(entity, "Pref不可为空！");
+        sysPlanMapper.insert(entity.getSysPref());
         return entity;
     }
 
+//    @Override
+//    public void insertList(List<Pref> entities) {
+//
+//    }
+
+
     @Override
-    public void insertList(List<Plan> entities) {
+    public void insertList(List<Pref> entities) {
 
     }
 
@@ -105,48 +100,58 @@ public class SysPlanServiceImpl implements SysPlanService {
     }
 
     @Override
-    public boolean update(Plan entity) {
-        Assert.notNull(entity, "Role不可为空！");
-        return sysPlanMapper.updateByPrimaryKey(entity.getSysPlan()) > 0;
+    public boolean update(Pref entity) {
+        return false;
+    }
+
+//    @Override
+//    public boolean update(Pref entity) {
+////        Assert.notNull(entity, "Role不可为空！");
+////        return sysPlanMapper.updateByPrimaryKey(entity.getSysPlan()) > 0;
+//        return false;
+//    }
+
+    @Override
+    public boolean updateSelective(Pref entity) {
+//        Assert.notNull(entity, "Role不可为空！");
+//        return sysPlanMapper.updateByPrimaryKeySelective(entity.getSysPlan()) > 0;
+        return false;
     }
 
     @Override
-    public boolean updateSelective(Plan entity) {
-        Assert.notNull(entity, "Role不可为空！");
-        return sysPlanMapper.updateByPrimaryKeySelective(entity.getSysPlan()) > 0;
+    public Pref getByPrimaryKey(Long primaryKey) {
+//        Assert.notNull(primaryKey, "PrimaryKey不可为空！");
+//        SysPlan sysRole = sysPlanMapper.selectByPrimaryKey(primaryKey);
+//        return null == sysRole ? null : new Plan(sysRole);
+        return null;
     }
 
     @Override
-    public Plan getByPrimaryKey(Long primaryKey) {
-        Assert.notNull(primaryKey, "PrimaryKey不可为空！");
-        SysPlan sysRole = sysPlanMapper.selectByPrimaryKey(primaryKey);
-        return null == sysRole ? null : new Plan(sysRole);
+    public Pref getOneByEntity(Pref entity) {
+        Assert.notNull(entity, "Pref不可为空！");
+        SysPref sysRole = sysPlanMapper.selectOne(entity.getSysPref());
+        return null == sysRole ? null : new Pref(sysRole);
     }
 
     @Override
-    public Plan getOneByEntity(Plan entity) {
-        Assert.notNull(entity, "User不可为空！");
-        SysPlan sysRole = sysPlanMapper.selectOne(entity.getSysPlan());
-        return null == sysRole ? null : new Plan(sysRole);
+    public List<Pref> listAll() {
+        List<SysPref> sysRole = sysPlanMapper.selectAll();
+        return getPref(sysRole);
     }
 
     @Override
-    public List<Plan> listAll() {
-        List<SysPlan> sysRole = sysPlanMapper.selectAll();
-        return getPlan(sysRole);
+    public List<Pref> listByEntity(Pref entity) {
+        return null;
     }
-    private List<Plan> getPlan(List<SysPlan> sysRole) {
+
+    private List<Pref> getPref(List<SysPref> sysRole) {
         if (CollectionUtils.isEmpty(sysRole)) {
             return null;
         }
-        List<Plan> roleList = new ArrayList<>();
-        for (SysPlan r : sysRole) {
-            roleList.add(new Plan(r));
+        List<Pref> roleList = new ArrayList<>();
+        for (SysPref r : sysRole) {
+            roleList.add(new Pref(r));
         }
         return roleList;
-    }
-    @Override
-    public List<Plan> listByEntity(Plan entity) {
-        return null;
     }
 }

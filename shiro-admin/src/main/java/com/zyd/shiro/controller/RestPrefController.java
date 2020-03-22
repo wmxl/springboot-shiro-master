@@ -20,10 +20,10 @@
 package com.zyd.shiro.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.zyd.shiro.business.entity.Plan;
+import com.zyd.shiro.business.entity.Pref;
 import com.zyd.shiro.business.enums.ResponseStatus;
-import com.zyd.shiro.business.service.SysPlanService;
-import com.zyd.shiro.business.vo.PlanConditionVO;
+import com.zyd.shiro.business.service.SysPrefService;
+import com.zyd.shiro.business.vo.PrefConditionVO;
 import com.zyd.shiro.framework.object.PageResult;
 import com.zyd.shiro.framework.object.ResponseVO;
 import com.zyd.shiro.util.ResultUtil;
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 预案管理
+ * 用户偏好
  *
  * @author wmxl
  * @version 1.0
@@ -44,21 +44,22 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 1.0
  */
 @RestController
-@RequestMapping("/plan")
-public class RestPlanController {
+@RequestMapping("/pref")
+public class RestPrefController {
     @Autowired
-    private SysPlanService planService;
+    private SysPrefService planService;
 
     @RequiresPermissions("druid")
     @PostMapping("/list")
-    public PageResult list(PlanConditionVO vo) {
-        PageInfo<Plan> pageInfo = planService.findPageBreakByCondition(vo);
+    public PageResult list(PrefConditionVO vo) {
+        System.out.println("C2");
+        PageInfo<Pref> pageInfo = planService.findPageBreakByCondition(vo);
         return ResultUtil.tablePage(pageInfo);
     }
 
     @RequiresPermissions("druid")
     @PostMapping(value = "/add")
-    public ResponseVO add(Plan user) {
+    public ResponseVO add(Pref user) {
         try {
             planService.insert(user);
             return ResultUtil.success("成功");
@@ -88,7 +89,7 @@ public class RestPlanController {
 
     @RequiresPermissions("druid")
     @PostMapping("/edit")
-    public ResponseVO edit(Plan user) {
+    public ResponseVO edit(Pref user) {
         try {
             planService.updateSelective(user);
         } catch (Exception e) {

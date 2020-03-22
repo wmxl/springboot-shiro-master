@@ -59,15 +59,19 @@ public class RenderController {
     public ModelAndView user() {
         return ResultUtil.view("user/list");
     }
-    @RequiresPermissions("carusers")
-    @GetMapping("/carusers")
-    public ModelAndView caruser() {
-        return ResultUtil.view("user/list");
+    @RequiresPermissions("druid")
+    @GetMapping("/prefs")
+    public ModelAndView pref() {
+        System.out.println("C1");
+
+        return ResultUtil.view("pref/list");
     }
 
     @RequiresPermissions("druid")
     @GetMapping("/plans")
     public ModelAndView plan() {
+        System.out.println("C1");
+
         return ResultUtil.view("plan/list");
     }
 
